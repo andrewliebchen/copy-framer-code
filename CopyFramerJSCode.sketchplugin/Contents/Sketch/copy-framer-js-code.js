@@ -35,7 +35,7 @@ function onRun(context) {
 
   var i, len, clipboardText = "";
   for (i = 0, len = framerLayers.length; i < len; i++) {
-    clipboardText = clipboardText + framerLayerProperties(framerLayers[i]) + '\n';
+    clipboardText = clipboardText + framerLayerProperties(framerLayers[i]);
   }
 
   if (clipboardText != "") {
@@ -267,9 +267,9 @@ function layerCode(layer) {
 function framerLayerProperties(object) {
   var text
   if (object.layerType == "TextLayer") {
-    text = object.name + ' = new TextLayer({\n';
+    text = 'let ' + object.name + ' = new TextLayer({\n';
   } else {
-    text = object.name + ' = new Layer({\n';
+    text = 'let ' + object.name + ' = new Layer({\n';
   }
 
   Object.keys(object).forEach(function(key) {
@@ -277,7 +277,7 @@ function framerLayerProperties(object) {
       text = text + '\t' + key + ': ' + object[key] + ',\n';
     }
   });
-  return text + '\n});';
+  return text + '});\n\n';
 }
 
 ////////////////////////////////////////////////////////////////////////////////
