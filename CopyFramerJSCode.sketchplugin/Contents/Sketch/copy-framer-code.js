@@ -267,17 +267,17 @@ function layerCode(layer) {
 function framerLayerProperties(object) {
   var text
   if (object.layerType == "TextLayer") {
-    text = object.name + ' = new TextLayer\n';
+    text = object.name + ' = new TextLayer({\n';
   } else {
-    text = object.name + ' = new Layer\n';
+    text = object.name + ' = new Layer({\n';
   }
 
   Object.keys(object).forEach(function(key) {
     if (key != "layerType" && key != "name") {
-      text = text + '\t' + key + ': ' + object[key] + '\n';
+      text = text + '\t' + key + ': ' + object[key] + ',\n';
     }
   });
-  return text;
+  return text + '\n});';
 }
 
 ////////////////////////////////////////////////////////////////////////////////
